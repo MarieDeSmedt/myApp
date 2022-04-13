@@ -42,7 +42,7 @@ def signUp():
 
             conn = mysql.connect()
             cursor = conn.cursor()
-            _hashed_password = generate_password_hash(_password,method='pbkdf2:sha256', salt_length=16)
+            _hashed_password = generate_password_hash(_password)
             cursor.callproc('sp_createUser', (_name, _email, _hashed_password))
             data = cursor.fetchall()
 
@@ -82,16 +82,17 @@ def validateLogin():
  
         con = mysql.connect()
         cursor = con.cursor()
-        cursor.callproc('sp_validateLogin',(_username,))
+        cursor.callproc('sp_validateLogin',(_username))
         data = cursor.fetchall()
  
         if len(data) > 0:
+           
             if check_password_hash(str(data[0][3]),_password):
                 session['user'] = data[0][0]
                 
                 return redirect('/userHome')
             else:
-                
+               
                 return render_template('error.html',error = 'Wrong Email address or Password.')
         else:
             
@@ -99,7 +100,7 @@ def validateLogin():
  
  
     except Exception as e:
-        return render_template('error.html',error = str(e))
+        return render_template('error.html',error = _username)
     finally:
         cursor.close()
         con.close()
