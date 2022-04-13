@@ -8,6 +8,8 @@ mysql = MySQL()
 app = Flask(__name__)
 app.debug = True
 
+# app.config.from_object('config')
+
 # MySQL configurations
 app.config['MYSQL_DATABASE_USER'] = 'marie'
 app.config['MYSQL_DATABASE_PASSWORD'] = 'marikiki9283'
@@ -28,8 +30,6 @@ def showSignUp():
 
 @app.route('/api/signup', methods=['POST'])
 def signUp():
-    conn = mysql.connect()
-    cursor = conn.cursor()
     try:
         _name = request.form['inputName']
         _email = request.form['inputEmail']
@@ -38,12 +38,15 @@ def signUp():
         # validate the received values
         if _name and _email and _password:
 
-            _hashed_password = generate_password_hash(_password, method='pbkdf2:sha256', salt_length=16)
+            # All Good, let's call MySQL
 
+            conn = mysql.connect()
+            cursor = conn.cursor()
+            _hashed_password = generate_password_hash(_password,method='pbkdf2:sha256', salt_length=16)
             cursor.callproc('sp_createUser', (_name, _email, _hashed_password))
             data = cursor.fetchall()
 
-            if len(data) is 0:
+            if len(data) == 0:
                 conn.commit()
                 return json.dumps({'message': 'User created successfully !'})
             else:
@@ -85,14 +88,14 @@ def validateLogin():
         if len(data) > 0:
             if check_password_hash(str(data[0][3]),_password):
                 session['user'] = data[0][0]
-                return json.dumps({'error1': str(data[0])})
-                # return redirect('/userHome')
+                
+                return redirect('/userHome')
             else:
-                return json.dumps({'error2': str(data[0])})
-                # return render_template('error.html',error = 'Wrong Email address or Password.')
+                
+                return render_template('error.html',error = 'Wrong Email address or Password.')
         else:
-            return json.dumps({'error3': str(data[0])})
-            # return render_template('error.html',error = 'Wrong Email address or Password.')
+            
+            return render_template('error.html',error = 'Wrong Email address or Password.')
  
  
     except Exception as e:
