@@ -11,7 +11,7 @@ app.debug = True
 # MySQL configurations
 app.config['MYSQL_DATABASE_USER'] = 'marie'
 app.config['MYSQL_DATABASE_PASSWORD'] = 'marikiki9283'
-app.config['MYSQL_DATABASE_DB'] = 'BucketList'
+app.config['MYSQL_DATABASE_DB'] = 'MapApp'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 mysql.init_app(app)
 
@@ -107,6 +107,5 @@ def validateLogin():
 
 
 
-
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
