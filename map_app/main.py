@@ -7,7 +7,7 @@ import os
 mysql = MySQL()
 app = Flask(__name__)
 app.debug = True
-
+app.secret_key = 'why would I tell you my secret key?'
 # app.config.from_object('config')
 
 # MySQL configurations
@@ -109,11 +109,14 @@ def validateLogin():
         con.close()
 
 
-
+@app.route('/logout')
+def logout():
+    session.pop('user',None)
+    return redirect('/')
 
 
 
 
 if __name__ == "__main__":
-    app.secret_key = 'super secret key'
+    
     app.run(debug=True)
