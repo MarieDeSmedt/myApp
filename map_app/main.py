@@ -109,10 +109,7 @@ def validateLogin():
         con.close()
 
 
-@app.route('/logout')
-def logout():
-    session.pop('user',None)
-    return redirect('/')
+
 
 
 
