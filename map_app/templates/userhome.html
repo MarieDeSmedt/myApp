@@ -1,38 +1,50 @@
 {% extends 'base.html' %}
 
-{% block content %}
-            <div class="jumbotron">
-            </div>
-
-            <script>
-                $(function(){
-                    $.ajax({
-                        url : '/getSite',
-                        type : 'GET',
-                        success: function(res){
-                            var div = $('<div>')
-                                        .attr('class', 'list-group')
-                                        .append($('<a>')
-                                        .attr('class', 'list-group-item active')
-                                        .append($('<h4>')
-                                        .attr('class', 'list-group-item-heading'),
-                                    $('<p>')
-                                        .attr('class', 'list-group-item-text')));
-                            var SiteObj = JSON.parse(res);
-                            var Site = '';
-                                    $.each(SiteObj,function(index, value){
-                                        Site = $(div).clone();
-                                        $(Site).find('h4').text(value.Title);
-                                        $(Site).find('p').text(value.Description);
-                                        $('.jumbotron').append(Site);
-                                    });
-                        },
-                        error: function(error){
-                                console.log(error);
-                        }
-                    });
-                });
-            </script>
-            
-{% endblock %}    
-
+{% block content %}    
+    
+    <script>
+	$(function(){
+		$.ajax({
+			url : '/getSite',
+			type : 'GET',
+			success: function(res){
+				var div = $('<div>')
+                        .attr('class', 'list-group')
+                        .append($('<a>')
+                        .attr('class', 'list-group-item ')
+                        .append($('<h4>')
+                        .attr('class', 'list-group-item-heading'),
+                        $('<p>')
+                        .attr('class', 'list-group-item-text'),
+                        $('<p>')
+                        .attr('class', 'list-group-item-text'),
+                        $('<p>')
+                        .attr('class', 'list-group-item-text')
+                        ));
+							    
+			
+				var siteObj = JSON.parse(res);
+				var site = '';
+				
+				$.each(siteObj,function(index, value){
+					site = $(div).clone();
+					$(site).find('h4').text(value.Title);
+					$(site).find('p').text(value.siteSid);
+                    $(site).find('p').text(value.Longitude);
+                    $(site).find('p').text(value.Latitude);
+					$('.jumbotron').append(site);
+				});
+			},
+			error: function(error){
+				console.log(error);
+			}
+		});
+	});
+    </script>
+    <div class="jumbotron">
+        
+       
+    </div>
+    
+{% endblock %}      
+  

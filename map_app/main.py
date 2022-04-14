@@ -94,7 +94,7 @@ def validateLogin():
             if check_password_hash(str(data[0][3]),_password):
                 session['user'] = data[0][0]
                 # return redirect('/userHome')
-                return redirect('/getSite')
+                return redirect('/userHome')
             else:
                
                 return render_template('error.html',error = 'Wrong Email address or Password.')
@@ -135,7 +135,7 @@ def addSite():
             cursor.callproc('sp_addSite',(_title,_longitude,_latitude,_siteSid,_user))
             data = cursor.fetchall()
  
-            if len(data) is 0:
+            if len(data) == 0:
                 conn.commit()
                 return redirect('/userhome')
             else:
@@ -161,20 +161,18 @@ def getSite():
             cursor.callproc('sp_GetSiteByUser',(_user,))
             sites = cursor.fetchall()
  
-            site_dict = []
-
-            # for site,i in sites:
-            #     new = {
-            #             'Id': site[0],
-            #             'Title': site[1],
-            #             'Longitude': site[2],
-            #             'Latitude': site[3],
-            #             'SiteSid': site[4],
-            #             'Date': site[6]}
-            #     site_dict[i]=new
+            sites_dict = []
+            for site in sites:
+                site_dict = {
+                        'Id': site[0],
+                        'Title': site[1],
+                        'Longitude': site[2],
+                        'Latitude': site[3],
+                        'siteSid': site[4],
+                        'Date': site[6]}
+                sites_dict.append(site_dict)
  
-            
-            return render_template('error.html', error = json.dumps(sites))
+            return json.dumps(sites_dict)
         else:
             return render_template('error.html', error = 'Unauthorized Access')
     except Exception as e:
