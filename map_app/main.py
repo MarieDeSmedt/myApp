@@ -93,7 +93,8 @@ def validateLogin():
            
             if check_password_hash(str(data[0][3]),_password):
                 session['user'] = data[0][0]
-                return redirect('/userHome')
+                # return redirect('/userHome')
+                return redirect('/getSite')
             else:
                
                 return render_template('error.html',error = 'Wrong Email address or Password.')
@@ -136,7 +137,7 @@ def addSite():
  
             if len(data) is 0:
                 conn.commit()
-                return redirect('/userHome')
+                return redirect('/userhome')
             else:
                 return render_template('error.html',error = 'An error occurred!')
  
@@ -148,6 +149,36 @@ def addSite():
         cursor.close()
         conn.close()
 
+
+@app.route('/getSite')
+def getSite():
+    try:
+        if session.get('user'):
+            _user = session.get('user')
+ 
+            con = mysql.connect()
+            cursor = con.cursor()
+            cursor.callproc('sp_GetSiteByUser',(_user,))
+            sites = cursor.fetchall()
+ 
+            site_dict = []
+
+            # for site,i in sites:
+            #     new = {
+            #             'Id': site[0],
+            #             'Title': site[1],
+            #             'Longitude': site[2],
+            #             'Latitude': site[3],
+            #             'SiteSid': site[4],
+            #             'Date': site[6]}
+            #     site_dict[i]=new
+ 
+            
+            return render_template('error.html', error = json.dumps(sites))
+        else:
+            return render_template('error.html', error = 'Unauthorized Access')
+    except Exception as e:
+        return render_template('error.html', error = str(e))
 
 
 
