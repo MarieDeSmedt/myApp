@@ -109,8 +109,15 @@ def validateLogin():
         con.close()
 
 
+@app.route('/logout')
+def logout():
+    session.pop('user',None)
+    return redirect('/')
 
 
+@app.route('/showAddSite')
+def showAddSite():
+    return render_template('addSite.html')
 
 
 

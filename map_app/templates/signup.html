@@ -19,74 +19,64 @@
 			
 			<div class="header">
 				
-				<nav
-					class="border-bottom flex-wrap mb-4 py-3 d-flex justify-content-center"
-				>
-					<a
-						href="/"
-						class="text-dark text-decoration-none mb-3 mb-md-0 d-flex align-items-center me-md-auto"
-					>
+				<nav class="border-bottom flex-wrap mb-4 py-3 d-flex justify-content-center">
+					<a href="/" class="text-dark text-decoration-none mb-3 mb-md-0 d-flex align-items-center me-md-auto">
 						<span class="fs-4">Python Flask App</span>
 					</a>
-
 					<ul class="nav nav-pills">
 						<li class="nav-item">
 							<a href="/" class="nav-link">Home</a>
 						</li>
 						<li class="nav-item">
-							<a href="/signup" class="nav-link active" aria-current="page"
-								>Signup</a
-							>
+							<a href="/showSignin" class="nav-link">Sign In</a>
 						</li>
-						<li class="nav-item">
-							<a href="/signin" class="nav-link">Sign In</a>
+                        <li class="nav-item">
+							<a href="/signup" class="nav-link active" aria-current="page">Signup</a>
 						</li>
 					</ul>
 				
 				</nav>
-				
 			</div>
+
+
+
 			<div class="bg-light rounded-3 mb-4 p-5">
 				<div class="container-fluid py-5">
+
 					<h1 class="text-center fw-bold display-5">MapApp</h1>
+
 					<form id="form-signin" action="/api/signup" method="POST">
+                                
 						<label for="inputName" class="sr-only">Name</label>
-						<input
-							type="name"
-							name="inputName"
-							id="inputName"
-							class="form-control"
-							placeholder="Name"
-							required
-							autofocus
-						/>
-						<label for="inputEmail" class="sr-only"
-							>Email address</label
-						>
-						<input
-							type="email"
-							name="inputEmail"
-							id="inputEmail"
-							class="form-control"
-							placeholder="Email address"
-							required
-							autofocus
-						/>
+                            <input
+                                type="name"
+                                name="inputName"
+                                id="inputName"
+                                class="form-control"
+                                placeholder="Name"
+                                required
+                                autofocus
+                            />
+						<label for="inputEmail" class="sr-only">Email address</label>
+                            <input
+                                type="email"
+                                name="inputEmail"
+                                id="inputEmail"
+                                class="form-control"
+                                placeholder="Email address"
+                                required
+                                autofocus
+                            />
 						<label for="inputPassword" class="sr-only">Password</label>
-						<input
-							type="password"
-							name="inputPassword"
-							id="inputPassword"
-							class="form-control"
-							placeholder="Password"
-							required
-						/>
-						<button
-							class="btn btn-lg btn-primary btn-block"
-							type="submit"
-						>
-							Sign up
-						</button>
+                            <input
+                                type="password"
+                                name="inputPassword"
+                                id="inputPassword"
+                                class="form-control"
+                                placeholder="Password"
+                                required
+                            />
+						<button id="btnSignUp" class="btn btn-lg btn-primary btn-block" type="submit"> Sign up</button>
 						
 					</form>
 				</div>

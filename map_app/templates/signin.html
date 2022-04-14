@@ -17,38 +17,43 @@
  
     <div class="container">
       <div class="header">
-        <nav
-					class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom"
-				>
-          <ul class="nav nav-pills">
+				
+				<nav class="border-bottom flex-wrap mb-4 py-3 d-flex justify-content-center">
+					<a href="/" class="text-dark text-decoration-none mb-3 mb-md-0 d-flex align-items-center me-md-auto">
+						<span class="fs-4">Python Flask App</span>
+					</a>
+					<ul class="nav nav-pills">
+						<li class="nav-item">
+							<a href="/" class="nav-link">Home</a>
+						</li>
             <li class="nav-item">
-              <a href="/" class="nav-link">Home</a>
-          </li>
-            <li class="nav-item">
-              <a href="/showSignin" class="nav-link active" aria-current="page">SignIn</a>
-            </li>
-            <li class="nav-item">
-                <a href="/showSignUp" class="nav-link">SignUp</a>
-            </li>
-            
-          </ul>
-        </nav>
-        <h3 class="fs-4">Python Flask App</h3>
-      </div>
+							<a href="/showSignin" class="nav-link active" aria-current="page">SignIn</a>
+						</li>
+						<li class="nav-item">
+							<a href="/showSignUp" class="nav-link ">SignUp</a>
+						</li>
+						
+					</ul>
+				
+				</nav>
+			</div>
  
-      <div class="jumbotron">
-        <h1>MapApp</h1>
+      <div class="bg-light rounded-3 mb-4 p-5">
+				<div class="container-fluid py-5">
+
+					<h1 class="text-center fw-bold display-5">MapApp</h1>
         
-        <form class="form-signin" action="/validateLogin" method="POST">
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" name="inputEmail" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="Password" required>
+          <form class="form-signin" action="/validateLogin" method="POST">
+            <label for="inputEmail" class="sr-only">Email address</label>
+              <input type="email" name="inputEmail" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+            <label for="inputPassword" class="sr-only">Password</label>
+              <input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="Password" required>
          
-        <button id="btnSignIn" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-      </form>
-      </div>
- 
+            <button id="btnSignIn" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>				
+						
+					</form>
+				</div>
+			</div>
        
  
       <footer class="footer">
